@@ -147,6 +147,9 @@ class SQLAlchemyFixture(DBLoadableFixture):
             # note that when not using a connection, calling session.commit()
             # as the inheirted code does will automatically flush the session
             self.session.flush()
+        # this is a hack because I can't get transaction.commit
+        # to actually do anything for me...
+        self.session.commit()
 
         log.debug("transaction.commit() <- %s", self.transaction)
         DBLoadableFixture.commit(self)
